@@ -18,7 +18,8 @@ To test the system, we'll need to complete the function castVote(name, votes)
 that takes in the name of a candidate and an array of tallied votes. The
 function should return an array with the updated standings.
 
-We will be testing the system with three possible candidates: Tim, Sally and Beth. Each item in the votes array represents the number of votes for a particular candidate:
+We will be testing the system with three possible candidates: Tim, Sally and Beth.
+Each item in the votes array represents the number of votes for a particular candidate:
 
 The first item in the array votes[0] are the votes for Tim
 The second item in the arry votes[1] are the votes for Sally
