@@ -18,17 +18,16 @@ appropriate.
 Your function will receive an array of stations, where each station itself is an
 array with a name, a capacity, and a venue type.
 
-In order for a station to be deemed appropriate, it must have a capacity of at least
-20, and be a school or community centre.
+In order for a station to be deemed appropriate, it must have a capacity of at
+least 20, and be a school or community centre.
 */
 
 
 const chooseStations = (stations) => {
-  stations.filter(([name, num, type]) => {
-    num >= 20 && (type === 'school' || type === 'community centre')
-      ? console.log(name)
-      : null
-  }).map(name => name);
+  const filteredStations = stations.filter(station => station[1] >= 20 && (station[2] === 'school' || station[2] === 'community centre'))
+    .map(sta => sta[0]);
+
+  return filteredStations;
 };
 
 const stations = [
