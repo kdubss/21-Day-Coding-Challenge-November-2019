@@ -20,11 +20,7 @@ Our function should return an array that includes all of the elements in cars
 as well as our new element.
 */
 
-const carPassing = (cars, speed) => {
-  cars.push({ time: Date.now(), speed: speed });
-
-  return cars;
-};
+const carPassing = (cars, speed) => [...cars, { time: Date.now(), speed: speed }];
 
 const cars = [
   {
