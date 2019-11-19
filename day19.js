@@ -46,25 +46,27 @@ const pumpkinSpice = money => {
     { type: 'latte', cost: 3, spice: 15 },
     { type: 'macaron', cost: 1, spice: 3}
   ];
-  const return_spice = Array(4).fill(null);
+  const return_spice = Array(4).fill(0);
 
   let remaining_money;
   let total_spice = 0;
   pumpkin_spice.map(s => {
-    total_spice = total_spice + s.spice;
-    return_spice[3] = total_spice;
     switch (s.type) {
       case 'pie':
         return_spice[0] = Math.floor(money / s.cost);
-        remaining_money = money - s.cost;
+        remaining_money = money - s.cost * return_spice[0];
+        remaining_money
+        total_spice = total_spice + s.spice * return_spice[0];
         break;
       case 'latte':
         return_spice[1] = Math.floor(remaining_money / s.cost);
-        remaining_money = remaining_money - s.cost;
+        remaining_money = remaining_money - s.cost * return_spice[1];
+        total_spice = total_spice + s.spice * return_spice[1];
         break;
       case 'macaron':
         return_spice[2] = Math.floor(remaining_money / s.cost);
         remaining_money = remaining_money - s.cost;
+        total_spice = total_spice + s.spice * return_spice[2];
         break;
       default:
         return;
@@ -74,6 +76,6 @@ const pumpkinSpice = money => {
   return return_spice;
 };
 
-const money = 18; // Should return [1, 1, 1, 48]
+const money = 9; // Should return [1, 1, 1, 48]
 
 console.log(pumpkinSpice(money));
