@@ -35,35 +35,32 @@ return an object with the individual counts.
 */
 
 const countTickets = tickets => {
-  const ticketColours = (value, index, self) => self.indexOf(value) === index;
-  const distinctTix = tickets.filter(ticketColours);
-  const ticketCountsObj = {};
-
-  distinctTix.map(ticket => {
-    ticketCountsObj[ticket] = 0
-  });
-
-  tickets.map(ticket => {
-    ticketCountsObj.hasOwnProperty(ticket)
-      ? ticketCountsObj[ticket]++
-      : null;
-  });
-
-  return ticketCountsObj;
+  return tickets.reduce((ticketCounts, ticketColour) => {
+    return {
+      ...ticketCounts,
+      [ticketColour]: ticketCounts[ticketColour] + 1
+    };
+  }, { red: 0, green: 0, blue: 0 });
 };
 
 const bestOdds = (tickets, raffleEntries) => {
-  const ticketCounts = countTickets(tickets);
+  const ticket_counts = countTickets(tickets);
+  const odds = [];
 
-  return ticketCounts;
+  Object.keys(ticket_counts).map(t => {
+    odds.push([t, ticket_counts[t] / raffleEntries[t]]);
+  });
+
+  const best_odd = odds.sort((a, b) => b[1] - a[1])[0];
+
+  return `You have the best odds of winning the ${best_odd[0]} raffle.`;
 };
 
 const tickets = [
   'red',
   'red',
-  'green',
-  'blue',
-  'green'
+  'red',
+  'red',
 ];
 
 const raffleEntries = {
@@ -73,4 +70,4 @@ const raffleEntries = {
 };
 
 console.log(countTickets(tickets));
-console.log('\n\n', bestOdds(tickets, raffleEntries));
+console.log('\n', bestOdds(tickets, raffleEntries), '\n');
