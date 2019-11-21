@@ -40,19 +40,38 @@ const PI = 3.14159
 
 const sphereVolume = function (radius) {
   return (4 / 3) * (PI * (radius ** 3));
-}
+};
 
 const coneVolume = function (radius, height) {
   return (PI * (radius ** 2)) * (height / 3);
-}
+};
 
 const prismVolume = function (height, width, depth) {
-
-}
+  return (width * depth) * height;
+};
 
 const totalVolume = function (solids) {
-
-}
+  let total_volume = 0;
+  solids.map(solid => {
+    switch(solid.type) {
+      case 'sphere':
+        total_volume = total_volume + sphereVolume(solid.radius);
+        break;
+      case 'cone':
+        total_volume = total_volume + coneVolume(solid.radius, solid.height);
+        break;
+      case 'prism':
+        total_volume = total_volume + prismVolume(
+          solid.height, solid.width, solid.depth
+        );
+        break;
+      default:
+        return;
+    }
+  });
+  console.log('total_volume: ', total_volume);
+  return total_volume;
+};
 
 const sphere = {
   type: 'sphere',
@@ -63,6 +82,36 @@ const cone = {
   radius: 3,
   height: 5
 };
+const prism = {
+  type: 'prism',
+  height: 3,
+  width: 4,
+  depth: 5
+};
+
+const largeSphere = {
+  type: 'sphere',
+  radius: 40
+};
+
+const smallSphere = {
+  type: 'sphere',
+  radius: 10
+};
+
+const cone2 = {
+  type: 'cone',
+  radius: 3,
+  height: 5
+};
+
+const duck = [
+  largeSphere,
+  smallSphere,
+  cone2
+];
 
 console.log(sphereVolume(sphere.radius))
-console.log(coneVolume(cone.radius, cone.height));
+// console.log(coneVolume(cone.radius, cone.height));
+// console.log(prismVolume(prism.height, prism.width, prism.depth));
+console.log(totalVolume(duck));
