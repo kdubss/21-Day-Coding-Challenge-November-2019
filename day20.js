@@ -55,13 +55,13 @@ const totalVolume = function (solids) {
   solids.map(solid => {
     switch(solid.type) {
       case 'sphere':
-        total_volume = total_volume + sphereVolume(solid.radius);
+        total_volume += sphereVolume(solid.radius);
         break;
       case 'cone':
-        total_volume = total_volume + coneVolume(solid.radius, solid.height);
+        total_volume += coneVolume(solid.radius, solid.height);
         break;
       case 'prism':
-        total_volume = total_volume + prismVolume(
+        total_volume += prismVolume(
           solid.height, solid.width, solid.depth
         );
         break;
@@ -111,7 +111,7 @@ const duck = [
   cone2
 ];
 
-console.log(sphereVolume(sphere.radius))
+// console.log(sphereVolume(sphere.radius))
 // console.log(coneVolume(cone.radius, cone.height));
 // console.log(prismVolume(prism.height, prism.width, prism.depth));
 console.log(totalVolume(duck));
