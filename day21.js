@@ -37,18 +37,17 @@ will NOT need to consider special cases. For example, you do NOT need to
 worry about cases where one bakery has BOTH the ingredients for a recipe.
 */
 
-const ingredientCheck = (bakery_ingredients, recipe_ingredients) => {
-  bakery_ingredients.map(i => {
-    recipe_ingredients.includes(i) ? console.log(i) : null;
-  });
-};
-
 const chooseRecipe = (bakeryA, bakeryB, recipes) => {
-  const recipe = []
-  recipes.map(r => {
-    console.log(ingredientCheck(bakeryA, r.ingredients));
-    console.log(ingredientCheck(bakeryB, r.ingredients));
-  });
+  for (let recipe of recipes) {
+    const ingredient_1a = bakeryA.includes(recipe.ingredients[0]);
+    const ingredient_1b = bakeryA.includes(recipe.ingredients[1]);
+    const ingredient_2a = bakeryB.includes(recipe.ingredients[0]);
+    const ingredient_2b = bakeryB.includes(recipe.ingredients[1]);
+
+    if ((ingredient_1a || ingredient_1b) && (ingredient_2a || ingredient_2b)) {
+      return recipe.name;
+    }
+  };
 };
 
 const bakeryA = ['saffron', 'eggs', 'tomato paste', 'coconut', 'custard'];
